@@ -1,70 +1,48 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { fetchData } from '../features/newsSlice'
+import { useAppDispatch, useAppSelector } from '../store'
+import SingleNewsItem from './SingleNewsItem'
 
 const News = () => {
+  const { loading, news, page, search, error } = useAppSelector(
+    (state) => state.news
+  )
+
+  const dispatch = useAppDispatch()
+  console.log(error)
+
+  useEffect(() => {
+    dispatch(fetchData())
+  }, [page, search])
+
+  if (loading) {
+    return (
+      <section className='py-12'>
+        <div className='loading'></div>
+      </section>
+    )
+  }
+  if (error) {
+    return (
+      <section className='grid items-center pt-20 justify-center'>
+        <h2 className='text-center'>No news found</h2>
+      </section>
+    )
+  }
+  if (news.length < 1) {
+    return (
+      <section className='grid items-center pt-20 justify-center'>
+        <h2 className='text-center'>No news Found</h2>
+      </section>
+    )
+  }
   return (
     <>
       <h2 className='text-center mb-8'>News</h2>
       <section className='w-[90vw] max-w-6xl mx-auto mb-20 grid lg:grid-cols-2 gap-8'>
-        <article className='bg-white rounded-md py-4 px-8'>
-          <h3 className='mb-4 mt-2'>hello</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
-            ipsa nesciunt architecto corporis aliquam, nulla quisquam iusto sed
-            et voluptatibus ullam, voluptates assumenda facilis tenetur
-            accusamus aut totam quam? Sed?
-          </p>
-          <p className='mb-2 text-[#589ea0]'>
-            by <span>author |</span> date
-          </p>
-          <Link to='/' className='text-sm mr-3 capitalize text-[#549984]'>
-            read me
-          </Link>
-        </article>
-        <article className='bg-white rounded-md py-4 px-8'>
-          <h3 className='mb-4 mt-2'>hello</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
-            ipsa nesciunt architecto corporis aliquam, nulla quisquam iusto sed
-            et voluptatibus ullam, voluptates assumenda facilis tenetur
-            accusamus aut totam quam? Sed?
-          </p>
-          <p className='mb-2 text-[#589ea0]'>
-            by <span>author |</span> date
-          </p>
-          <Link to='/' className='text-sm mr-3 capitalize text-[#549984]'>
-            read me
-          </Link>
-        </article>
-        <article className='bg-white rounded-md py-4 px-8'>
-          <h3 className='mb-4 mt-2'>hello</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
-            ipsa nesciunt architecto corporis aliquam, nulla quisquam iusto sed
-            et voluptatibus ullam, voluptates assumenda facilis tenetur
-            accusamus aut totam quam? Sed?
-          </p>
-          <p className='mb-2 text-[#589ea0]'>
-            by <span>author |</span> date
-          </p>
-          <Link to='/' className='text-sm mr-3 capitalize text-[#549984]'>
-            read me
-          </Link>
-        </article>
-        <article className='bg-white rounded-md py-4 px-8'>
-          <h3 className='mb-4 mt-2'>hello</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
-            ipsa nesciunt architecto corporis aliquam, nulla quisquam iusto sed
-            et voluptatibus ullam, voluptates assumenda facilis tenetur
-            accusamus aut totam quam? Sed?
-          </p>
-          <p className='mb-2 text-[#589ea0]'>
-            by <span>author |</span> date
-          </p>
-          <Link to='/' className='text-sm mr-3 capitalize text-[#549984]'>
-            read me
-          </Link>
-        </article>
+        {news.map((item, index) => {
+          return <SingleNewsItem key={index} item={item} />
+        })}
       </section>
     </>
   )

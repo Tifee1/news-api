@@ -4,7 +4,9 @@ const Header = () => {
   return (
     <header className='bg-[#919191] text-white min-h-[80px] grid items-center'>
       <section className='flex items-center justify-between w-[90%] max-w-3xl mx-auto'>
-        <h2 className='italic'>newsApi</h2>
+        <Link to='/' className='trans hover:text-white/70'>
+          <h2 className='italic'>newsApi</h2>
+        </Link>
         <nav className='flex gap-6'>
           <Link to='#about' className='trans hover:text-white/70'>
             About

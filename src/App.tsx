@@ -10,7 +10,7 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/news/:id' element={<SingleNews />} />
+          <Route path='/news/:slug' element={<SingleNews />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </MainLayout>
