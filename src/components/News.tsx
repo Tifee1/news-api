@@ -9,7 +9,6 @@ const News = () => {
   )
 
   const dispatch = useAppDispatch()
-  console.log(error)
 
   // Fetch data
   useEffect(() => {
