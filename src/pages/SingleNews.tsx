@@ -10,6 +10,7 @@ const SingleNews = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
+  // Fetch Single News
   const fetchData = async () => {
     setLoading(true)
     try {
@@ -30,6 +31,7 @@ const SingleNews = () => {
     fetchData()
   }, [slug])
 
+  // If loading
   if (loading) {
     return (
       <section className='grid items-center justify-center'>
@@ -38,6 +40,7 @@ const SingleNews = () => {
     )
   }
 
+  // If Error
   if (error) {
     return (
       <section className='grid pt-20 items-center justify-center'>
@@ -45,6 +48,8 @@ const SingleNews = () => {
       </section>
     )
   }
+
+  // If news item not found
   if (!newsItem) {
     return (
       <section className='grid pt-20 items-center justify-center'>
@@ -53,6 +58,7 @@ const SingleNews = () => {
     )
   }
 
+  // Single Item
   return (
     <section className='w-[90%] max-w-5xl mx-auto my-8 grid gap-8'>
       <div>

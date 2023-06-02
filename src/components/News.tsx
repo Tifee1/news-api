@@ -11,10 +11,12 @@ const News = () => {
   const dispatch = useAppDispatch()
   console.log(error)
 
+  // Fetch data
   useEffect(() => {
     dispatch(fetchData())
   }, [page, search])
 
+  // If loading
   if (loading) {
     return (
       <section className='py-12'>
@@ -22,6 +24,8 @@ const News = () => {
       </section>
     )
   }
+
+  // if axios error
   if (error) {
     return (
       <section className='grid items-center pt-20 justify-center'>
@@ -29,6 +33,8 @@ const News = () => {
       </section>
     )
   }
+
+  // if no item in array
   if (news.length < 1) {
     return (
       <section className='grid items-center pt-20 justify-center'>
@@ -36,6 +42,8 @@ const News = () => {
       </section>
     )
   }
+
+  // Return News Item
   return (
     <>
       <h2 className='text-center mb-8'>News</h2>

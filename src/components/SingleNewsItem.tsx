@@ -8,6 +8,7 @@ type Props = {
 }
 
 const SingleNewsItem = ({ item }: Props) => {
+  // Turn News Title to a slug
   const slug = slugify(item.title, { lower: true, replacement: '-' })
 
   return (
@@ -20,7 +21,7 @@ const SingleNewsItem = ({ item }: Props) => {
       </p>
       <Link
         to={`/news/${slug}`}
-        className='text-2xl mr-3 capitalize text-[#549984]'
+        className='trans text-2xl mr-3 capitalize px-1.5 py-1 rounded-sm text-[white] bg-[#549984] hover:bg-blue-900'
       >
         read me
       </Link>

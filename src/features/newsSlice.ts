@@ -31,6 +31,7 @@ const initialState: InitialStateType = {
   pagination: 1,
 }
 
+// AsyncThunk Function
 export const fetchData = createAsyncThunk<
   { news: NewsData[]; pages: number },
   void,
@@ -49,16 +50,20 @@ export const fetchData = createAsyncThunk<
   return { news: data.articles, pages: data.totalResults }
 })
 
+// Create Slice
 const newsSlice = createSlice({
   name: 'news',
   initialState,
   reducers: {
+    // set search function
     setSearch: (state, action) => {
       state.search = action.payload
     },
+    // set page function
     setPage: (state, action) => {
       state.page = action.payload
     },
+    // next page function
     nextPage: (state) => {
       let page = state.page + 1
       if (page > 10) {
@@ -66,6 +71,7 @@ const newsSlice = createSlice({
       }
       state.page = page
     },
+    // previous page function
     prevPage: (state) => {
       let page = state.page - 1
       if (page < 1) {
